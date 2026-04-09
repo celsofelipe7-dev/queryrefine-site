@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QueryRefine Pro — Reclaim Your Search</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:    '#0f172a',
+            card:    '#1e293b',
+            border:  '#334155',
+            accent:  '#38bdf8',
+            accentd: '#0ea5e9',
+            success: '#4ade80',
+            muted:   '#94a3b8',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'fade-up':   'fadeUp 0.6s ease both',
+            'pulse-slow':'pulse 3s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body { background-color: #0f172a; }
+
+    /* Glow azul suave em elementos de destaque */
+    .glow        { box-shadow: 0 0 32px 4px rgba(56,189,248,.25); }
+    .glow-text   { text-shadow: 0 0 40px rgba(56,189,248,.45); }
+    .glow-border { box-shadow: 0 0 0 1px rgba(56,189,248,.35), 0 0 24px rgba(56,189,248,.12); }
+
+    /* Gradiente de fundo do Hero */
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(56,189,248,.15) 0%, transparent 70%),
+        #0f172a;
+    }
+
+    /* Grade decorativa */
+    .grid-overlay {
+      background-image:
+        linear-gradient(rgba(56,189,248,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Animação stagger para cards */
+    .stagger-1 { animation-delay: .1s; }
+    .stagger-2 { animation-delay: .2s; }
+    .stagger-3 { animation-delay: .3s; }
+    .stagger-4 { animation-delay: .4s; }
+    .stagger-5 { animation-delay: .5s; }
+
+    /* Linha de código estilizada */
+    .code-block {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    }
+
+    /* Scrollbar customizada */
+    ::-webkit-scrollbar       { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  </style>
+</head>
+
+<body class="text-slate-100 font-sans antialiased">
+
+  <!-- ═══════════════════════════════════════════════ NAVBAR ══ -->
+  <nav class="fixed top-0 inset-x-0 z-50 border-b border-border/60 backdrop-blur-md bg-navy/80">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🛡️</span>
+        <span class="font-bold text-base tracking-tight">
+          Query<span class="text-accent">Refine</span>
+          <span class="ml-1 text-xs font-semibold bg-accent/10 text-accent border border-accent/20 rounded-full px-2 py-0.5">PRO</span>
+        </span>
+      </div>
+      <div class="hidden md:flex items-center gap-8 text-sm text-muted font-medium">
+        <a href="#features"    class="hover:text-accent transition-colors">Features</a>
+        <a href="#how-it-works"class="hover:text-accent transition-colors">How It Works</a>
+        <a href="#faq"         class="hover:text-accent transition-colors">FAQ</a>
+      </div>
+      <a href="#cta"
+         class="hidden md:inline-flex items-center gap-2 bg-accent text-navy text-sm font-bold px-4 py-2 rounded-lg hover:bg-accentd transition-colors">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        Add to Chrome
+      </a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════ HERO ══ -->
+  <section class="hero-bg grid-overlay relative min-h-screen flex items-center pt-16 overflow-hidden">
+
+    <!-- Orbs decorativos -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-accent/5 blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/2 -right-48 w-[500px] h-[500px] rounded-full bg-accent/5 blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-6 py-24 text-center relative z-10">
+
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 text-accent text-xs font-semibold mb-8 animate-fade-up">
+        <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse-slow"></span>
+        Free Chrome Extension · No Account Required
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[1.05] mb-6 animate-fade-up stagger-1">
+        Google Search.<br/>
+        <span class="text-accent glow-text">Without the Garbage.</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="max-w-2xl mx-auto text-lg md:text-xl text-muted leading-relaxed mb-10 animate-fade-up stagger-2">
+        QueryRefine Pro silently removes SEO spam, Pinterest clutter, and low-quality results
+        <strong class="text-slate-100">before the page even loads</strong> — giving you clean,
+        relevant results every single time.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up stagger-3" id="cta">
+        <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener"
+           class="glow group flex items-center gap-3 bg-accent text-navy font-black text-base px-8 py-4 rounded-xl hover:bg-accentd transition-all hover:scale-105 active:scale-95">
+          <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.845a5.545 5.545 0 0 1-6.052-8.109zm13.342 9.763a5.51 5.51 0 0 1-9.364-4.233h-.002l-3.953-6.847a11.97 11.97 0 0 0 11.07 17.923l3.953-6.847a5.51 5.51 0 0 1-1.704.004zM12 8.727a3.273 3.273 0 1 1 0 6.546 3.273 3.273 0 0 1 0-6.546z"/>
+          </svg>
+          Add to Chrome — It's Free
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#how-it-works"
+           class="flex items-center gap-2 border border-border text-slate-300 font-semibold text-sm px-6 py-4 rounded-xl hover:border-accent/50 hover:text-accent transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
+          See How It Works
+        </a>
+      </div>
+
+      <!-- Social proof -->
+      <p class="mt-8 text-xs text-muted animate-fade-up stagger-4">
+        100% Private &nbsp;·&nbsp; No data collected &nbsp;·&nbsp; Open Source
+      </p>
+
+      <!-- Hero mockup — URL com filtros aplicados -->
+      <div class="mt-16 max-w-2xl mx-auto glow-border bg-card border border-border rounded-2xl p-4 text-left animate-fade-up stagger-5">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-3 h-3 rounded-full bg-red-500/70"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500/70"></div>
+          <div class="flex-1 bg-navy rounded-md px-3 py-1 ml-2 text-xs text-muted code-block truncate">
+            google.com/search?q=<span class="text-slate-100">javascript+tutorials</span><span class="text-success"> -site:geeksforgeeks.org -site:tutorialspoint.com</span><span class="text-accent"> &amp;_qrf=1</span>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="flex items-start gap-3 p-2.5 bg-navy/60 rounded-lg">
+            <div class="w-4 h-4 mt-0.5 rounded-sm bg-accent/20 shrink-0"></div>
+            <div>
+              <div class="text-xs text-accent font-medium">MDN Web Docs — JavaScript Guide</div>
+              <div class="text-xs text-muted mt-0.5">developer.mozilla.org › JavaScript › Guide</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-2.5 bg-navy/60 rounded-lg">
+            <div class="w-4 h-4 mt-0.5 rounded-sm bg-accent/20 shrink-0"></div>
+            <div>
+              <div class="text-xs text-accent font-medium">javascript.info — The Modern JavaScript Tutorial</div>
+              <div class="text-xs text-muted mt-0.5">javascript.info › js</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 px-2.5 py-1.5">
+            <svg class="w-3 h-3 text-success shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            <span class="text-xs text-success font-medium">Filters applied before page load — zero flicker</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════ FEATURES ══ -->
+  <section id="features" class="py-28 border-t border-border/50">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <div class="text-center mb-16">
+        <p class="text-accent text-sm font-semibold tracking-widest uppercase mb-3">Features</p>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight">
+          Three modes.<br/>One clean search.
+        </h2>
+        <p class="mt-4 text-muted max-w-xl mx-auto">
+          Toggle each filter independently from the popup. Changes apply instantly on the next search.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Card 1 — Developer Mode -->
+        <div class="group glow-border bg-card border border-border rounded-2xl p-7 hover:border-accent/40 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-2xl mb-5">
+            💻
+          </div>
+          <h3 class="font-bold text-lg mb-2">Developer Mode</h3>
+          <p class="text-muted text-sm leading-relaxed mb-5">
+            Tired of copy-paste farms ranking above actual documentation?
+            Developer Mode silently removes the usual suspects from every search.
+          </p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2 text-muted">
+              <svg class="w-4 h-4 text-success shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              Blocks GeeksForGeeks
+            </li>
+            <li class="flex items-center gap-2 text-muted">
+              <svg class="w-4 h-4 text-success shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              Blocks TutorialsPoint
+            </li>
+            <li class="flex items-center gap-2 text-muted">
+              <svg class="w-4 h-4 text-success shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              Blocks CodeGrepper
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 2 — Research Mode (destaque central) -->
+        <div class="group relative bg-card rounded-2xl p-7 border border-accent/40 hover:-translate-y-1 transition-all"
+             style="box-shadow: 0 0 0 1px rgba(56,189,248,.25), 0 0 40px rgba(56,189,248,.12);">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-navy text-xs font-black px-3 py-1 rounded-full">
+            MOST POWERFUL
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-2xl mb-5">
+            🔬
+          </div>
+          <h3 class="font-bold text-lg mb-2">Research Mode</h3>
+          <p class="text-muted text-sm leading-relaxed mb-5">
+            Transforms Google into an academic search engine. Surfaces only PDFs,
+            university domains, and government publications.
+          </p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2 text-muted">
+              <svg class="w-4 h-4 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              Focuses on <code class="text-accent">filetype:pdf</code>
+            </li>
+            <li class="flex items-center gap-2 text-muted">
+              <svg class="w-4 h-4 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              Prioritises <code class="text-accent">.edu</code> domains
+            </li>
+            <li class="flex items-center gap-2 text-muted">
+              <svg class="w-4 h-4 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              Prioritises <code class="text-accent">.gov</code> sources
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 3 — Anti-Pinterest -->
+        <div class="group glow-border bg-card border border-border rounded-2xl p-7 hover:border-accent/40 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-2xl mb-5">
+            🚫
+          </div>
+          <h3 class="font-bold text-lg mb-2">Anti-Pinterest</h3>
+          <p class="text-muted text-sm leading-relaxed mb-5">
+            One toggle. Never see a Pinterest result again — on any search topic,
+            in any language, forever. Simple and ruthlessly effective.
+          </p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2 text-muted">
+              <svg class="w-4 h-4 text-success shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              Works on all search queries
+            </li>
+            <li class="flex items-center gap-2 text-muted">
+              <svg class="w-4 h-4 text-success shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              No login walls or sign-ups
+            </li>
+            <li class="flex items-center gap-2 text-muted">
+              <svg class="w-4 h-4 text-success shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              Zero performance impact
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Stats strip -->
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden">
+        <div class="bg-card px-6 py-5 text-center">
+          <div class="text-3xl font-black text-accent">0ms</div>
+          <div class="text-xs text-muted mt-1">Added latency</div>
+        </div>
+        <div class="bg-card px-6 py-5 text-center">
+          <div class="text-3xl font-black text-accent">0KB</div>
+          <div class="text-xs text-muted mt-1">Data collected</div>
+        </div>
+        <div class="bg-card px-6 py-5 text-center">
+          <div class="text-3xl font-black text-accent">3</div>
+          <div class="text-xs text-muted mt-1">Permissions only</div>
+        </div>
+        <div class="bg-card px-6 py-5 text-center">
+          <div class="text-3xl font-black text-accent">100%</div>
+          <div class="text-xs text-muted mt-1">Client-side</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ HOW IT WORKS ══ -->
+  <section id="how-it-works" class="py-28 border-t border-border/50 bg-gradient-to-b from-transparent to-card/30">
+    <div class="max-w-5xl mx-auto px-6">
+
+      <div class="text-center mb-16">
+        <p class="text-accent text-sm font-semibold tracking-widest uppercase mb-3">How It Works</p>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight">
+          Fast. Silent. Invisible.
+        </h2>
+        <p class="mt-4 text-muted max-w-lg mx-auto">
+          QueryRefine uses Chrome's native <code class="text-accent text-sm">declarativeNetRequest</code> API
+          to intercept requests at the network level — before a single byte is downloaded.
+        </p>
+      </div>
+
+      <div class="relative">
+        <!-- Linha conectora -->
+        <div class="hidden md:block absolute left-1/2 top-8 bottom-8 w-px bg-gradient-to-b from-accent/40 via-accent/20 to-transparent -translate-x-1/2"></div>
+
+        <div class="space-y-10">
+
+          <!-- Step 1 -->
+          <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
+            <div class="md:text-right mb-6 md:mb-0">
+              <div class="inline-flex items-center gap-2 text-accent font-semibold text-sm mb-2">
+                <span class="w-6 h-6 rounded-full bg-accent text-navy text-xs font-black flex items-center justify-center">1</span>
+                You type a search
+              </div>
+              <h3 class="font-bold text-xl mb-2">Normal query, as always</h3>
+              <p class="text-muted text-sm leading-relaxed">
+                You search on Google exactly as you always have. No special syntax required.
+                QueryRefine works completely in the background.
+              </p>
+            </div>
+            <div class="bg-card border border-border rounded-xl p-4 code-block text-sm">
+              <span class="text-muted">google.com/search?q=</span><span class="text-slate-100">best javascript framework 2024</span>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
+            <div class="bg-card border border-border rounded-xl p-4 code-block text-sm order-2 md:order-1 mt-6 md:mt-0">
+              <span class="text-muted">Intercepted at network level</span><br/>
+              <span class="text-muted">q=</span><span class="text-slate-100">best javascript framework 2024</span><br/>
+              <span class="text-success">+ -site:geeksforgeeks.org</span><br/>
+              <span class="text-success">+ -site:tutorialspoint.com</span><br/>
+              <span class="text-accent">→ Redirected before load</span>
+            </div>
+            <div class="order-1 md:order-2 mb-6 md:mb-0">
+              <div class="inline-flex items-center gap-2 text-accent font-semibold text-sm mb-2">
+                <span class="w-6 h-6 rounded-full bg-accent text-navy text-xs font-black flex items-center justify-center">2</span>
+                DNR intercepts the request
+              </div>
+              <h3 class="font-bold text-xl mb-2">Filters injected at network level</h3>
+              <p class="text-muted text-sm leading-relaxed">
+                Chrome's <strong class="text-slate-100">declarativeNetRequest</strong> API rewrites the URL
+                before the browser contacts Google's servers — zero latency, zero flicker.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
+            <div class="md:text-right mb-6 md:mb-0">
+              <div class="inline-flex items-center gap-2 text-accent font-semibold text-sm mb-2">
+                <span class="w-6 h-6 rounded-full bg-accent text-navy text-xs font-black flex items-center justify-center">3</span>
+                Clean results arrive
+              </div>
+              <h3 class="font-bold text-xl mb-2">Only quality results</h3>
+              <p class="text-muted text-sm leading-relaxed">
+                Google returns results with your filters already baked in.
+                No post-processing, no DOM manipulation — pure, clean HTML from the source.
+              </p>
+            </div>
+            <div class="bg-card border border-success/30 rounded-xl p-4 space-y-2">
+              <div class="flex items-center gap-2 text-sm">
+                <svg class="w-4 h-4 text-success shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span class="text-muted">vuejs.org — The Progressive JavaScript Framework</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm">
+                <svg class="w-4 h-4 text-success shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span class="text-muted">react.dev — React: The library for web and native UIs</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm">
+                <svg class="w-4 h-4 text-success shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span class="text-muted">svelte.dev — Cybernetically enhanced web apps</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════ FAQ ══ -->
+  <section id="faq" class="py-28 border-t border-border/50">
+    <div class="max-w-3xl mx-auto px-6">
+
+      <div class="text-center mb-16">
+        <p class="text-accent text-sm font-semibold tracking-widest uppercase mb-3">FAQ</p>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight">Common Questions</h2>
+      </div>
+
+      <div class="space-y-3" id="faq-list">
+
+        <details class="group bg-card border border-border rounded-xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-semibold text-sm hover:text-accent transition-colors list-none">
+            Does QueryRefine Pro collect any of my search data?
+            <svg class="w-4 h-4 text-muted shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-muted leading-relaxed border-t border-border/50 pt-4">
+            <strong class="text-slate-100">Absolutely not.</strong> QueryRefine Pro operates entirely inside
+            your browser. Your queries never leave your device — the extension only modifies the URL
+            parameters before Chrome sends them to Google. No analytics, no telemetry, no accounts.
+          </div>
+        </details>
+
+        <details class="group bg-card border border-border rounded-xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-semibold text-sm hover:text-accent transition-colors list-none">
+            Will it slow down my searches?
+            <svg class="w-4 h-4 text-muted shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-muted leading-relaxed border-t border-border/50 pt-4">
+            The extension uses Chrome's <code class="text-accent">declarativeNetRequest</code> API,
+            which runs at the browser's C++ networking layer — not in JavaScript. This means
+            <strong class="text-slate-100">zero added latency</strong>. In fact, filtering out irrelevant
+            results may make your workflow faster overall.
+          </div>
+        </details>
+
+        <details class="group bg-card border border-border rounded-xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-semibold text-sm hover:text-accent transition-colors list-none">
+            Does it work with Google in other languages?
+            <svg class="w-4 h-4 text-muted shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-muted leading-relaxed border-t border-border/50 pt-4">
+            Yes. The extension targets <code class="text-accent">www.google.com/search</code> regardless
+            of the <code class="text-accent">hl=</code> language parameter.
+            The <code class="text-accent">-site:</code> operator is a universal Google search operator
+            that works across all languages and regions.
+          </div>
+        </details>
+
+        <details class="group bg-card border border-border rounded-xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-semibold text-sm hover:text-accent transition-colors list-none">
+            Can I temporarily disable the extension?
+            <svg class="w-4 h-4 text-muted shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-muted leading-relaxed border-t border-border/50 pt-4">
+            Yes. Click the extension icon and hit <strong class="text-slate-100">"Pause Protection"</strong>.
+            This removes all active DNR rules instantly — your next search will be completely unfiltered.
+            Hit "Resume Protection" to bring everything back.
+          </div>
+        </details>
+
+        <details class="group bg-card border border-border rounded-xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-semibold text-sm hover:text-accent transition-colors list-none">
+            What permissions does QueryRefine Pro need and why?
+            <svg class="w-4 h-4 text-muted shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-muted leading-relaxed border-t border-border/50 pt-4">
+            Only three minimal permissions:
+            <ul class="mt-2 space-y-1">
+              <li><code class="text-accent">storage</code> — saves your filter preferences locally</li>
+              <li><code class="text-accent">activeTab</code> — reloads the current Google tab when you toggle a filter</li>
+              <li><code class="text-accent">declarativeNetRequest</code> — intercepts and rewrites Google search URLs</li>
+            </ul>
+            No broad host permissions beyond <code class="text-accent">google.com/search</code>.
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ FINAL CTA ══ -->
+  <section class="py-28 border-t border-border/50">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <div class="relative bg-card border border-accent/20 rounded-3xl p-12 overflow-hidden"
+           style="box-shadow: 0 0 80px rgba(56,189,248,.08);">
+
+        <!-- Glow de fundo -->
+        <div class="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none"></div>
+
+        <span class="text-5xl block mb-6">🛡️</span>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight mb-4">
+          Your search.<br/><span class="text-accent">Your rules.</span>
+        </h2>
+        <p class="text-muted max-w-md mx-auto mb-10 leading-relaxed">
+          Join developers, researchers and power users who've permanently upgraded
+          their Google experience. Free, open-source, and always private.
+        </p>
+
+        <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener"
+           class="glow inline-flex items-center gap-3 bg-accent text-navy font-black text-lg px-10 py-5 rounded-2xl hover:bg-accentd transition-all hover:scale-105 active:scale-95">
+          <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.845a5.545 5.545 0 0 1-6.052-8.109zm13.342 9.763a5.51 5.51 0 0 1-9.364-4.233h-.002l-3.953-6.847a11.97 11.97 0 0 0 11.07 17.923l3.953-6.847a5.51 5.51 0 0 1-1.704.004zM12 8.727a3.273 3.273 0 1 1 0 6.546 3.273 3.273 0 0 1 0-6.546z"/>
+          </svg>
+          Add to Chrome — It's Free
+        </a>
+
+        <p class="mt-5 text-xs text-muted">
+          Available for Chrome and all Chromium-based browsers (Edge, Brave, Arc)
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════ FOOTER ══ -->
+  <footer class="border-t border-border/50 py-10">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted">
+      <div class="flex items-center gap-2">
+        <span class="text-lg">🛡️</span>
+        <span>Query<span class="text-accent">Refine</span> Pro</span>
+        <span class="text-border">·</span>
+        <span>© 2025</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/celsofelipe7-dev/QueryRefine-Roadmap" target="_blank" rel="noopener"
+           class="hover:text-accent transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          Roadmap
+        </a>
+        <span class="text-border">·</span>
+        <span class="text-xs">No tracking · No cookies · 100% private</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
