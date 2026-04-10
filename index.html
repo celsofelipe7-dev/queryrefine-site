@@ -46,6 +46,9 @@
       color: #93c5fd; font-size: 0.75rem; font-weight: 600;
       padding: 4px 12px; border-radius: 9999px; letter-spacing: 0.05em;
     }
+    /* Fix para âncoras não ficarem embaixo do header fixo */
+    section { scroll-margin-top: 5rem; }
+    
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
@@ -53,7 +56,6 @@
 </head>
 <body class="font-sans text-slate-300 antialiased">
 
-  <!-- ── NAV ─────────────────────────────────────────────────────────── -->
   <header class="fixed top-0 inset-x-0 z-50 border-b border-border/60 bg-navy/80 backdrop-blur-md">
     <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
@@ -80,286 +82,24 @@
   </header>
 
   <main>
-
-    <!-- ── HERO ─────────────────────────────────────────────────────── -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      <!-- background grid -->
-      <div class="absolute inset-0 opacity-[0.04]"
-           style="background-image:linear-gradient(#3b82f6 1px,transparent 1px),linear-gradient(90deg,#3b82f6 1px,transparent 1px);background-size:48px 48px"></div>
-      <!-- radial glow -->
-      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full"
-           style="background:radial-gradient(ellipse,rgba(59,130,246,0.12) 0%,transparent 70%);pointer-events:none"></div>
-
-      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        <div class="badge-pill mb-8">
-          <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4"/></svg>
-          Free · Open Source · Chrome Extension
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+            <div class="badge-pill mb-8">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4"/></svg>
+              Free · Open Source · Chrome Extension
+            </div>
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-6">
+              Search without<br/>
+              <span class="gradient-text">the noise.</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+              QueryRefine Pro automatically strips Pinterest boards, SEO link farms and low-quality spam from your Google results.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://chrome.google.com/webstore" class="inline-flex items-center justify-center gap-3 bg-electric hover:bg-electricDark text-white font-semibold px-8 py-4 rounded-xl text-base transition-colors glow">Install on Chrome</a>
+                <a href="#features" class="inline-flex items-center justify-center gap-2 border border-border text-slate-300 hover:text-white px-8 py-4 rounded-xl">See Features</a>
+            </div>
         </div>
-
-        <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-6">
-          Search without<br/>
-          <span class="gradient-text">the noise.</span>
-        </h1>
-
-        <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-          QueryRefine Pro automatically strips Pinterest boards, SEO link farms and low-quality spam from your Google results — so you get real answers, not content-farm garbage.
-          Built for developers who value signal over noise.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener"
-             class="inline-flex items-center justify-center gap-3 bg-electric hover:bg-electricDark text-white font-semibold px-8 py-4 rounded-xl text-base transition-colors glow">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.25)"/>
-              <circle cx="12" cy="12" r="5" fill="white"/>
-            </svg>
-            Install on Chrome — It's Free
-          </a>
-          <a href="#features"
-             class="inline-flex items-center justify-center gap-2 border border-border text-slate-300 hover:text-white hover:border-slate-400 font-semibold px-8 py-4 rounded-xl text-base transition-colors">
-            See Features
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- mock browser bar -->
-        <div class="mt-16 max-w-2xl mx-auto bg-surface border border-border rounded-2xl overflow-hidden glow">
-          <div class="flex items-center gap-2 px-4 py-3 border-b border-border bg-navy/60">
-            <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
-            <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
-            <span class="w-3 h-3 rounded-full bg-green-500/70"></span>
-            <div class="flex-1 mx-4 bg-navy rounded-md px-3 py-1 text-xs text-slate-500 font-mono text-left">
-              google.com/search?q=<span class="text-electric">react+hooks+tutorial</span>
-            </div>
-          </div>
-          <div class="p-5 space-y-3 text-left">
-            <div class="flex items-start gap-3 p-3 rounded-lg bg-navy/50">
-              <div class="w-4 h-4 mt-0.5 rounded-full bg-green-500/20 border border-green-500/40 flex-shrink-0 flex items-center justify-center">
-                <div class="w-1.5 h-1.5 rounded-full bg-green-400"></div>
-              </div>
-              <div>
-                <p class="text-sm font-medium text-white">react.dev – Hooks at a Glance</p>
-                <p class="text-xs text-slate-500">Official documentation · react.dev</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-3 p-3 rounded-lg opacity-30 line-through">
-              <div class="w-4 h-4 mt-0.5 rounded-full bg-red-500/20 border border-red-500/40 flex-shrink-0 flex items-center justify-center">
-                <div class="w-1.5 h-1.5 rounded-full bg-red-400"></div>
-              </div>
-              <div>
-                <p class="text-sm text-slate-400">pinterest.com – React Hooks Pins Board</p>
-                <p class="text-xs text-slate-600">Filtered by QueryRefine Pro</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-3 p-3 rounded-lg opacity-30 line-through">
-              <div class="w-4 h-4 mt-0.5 rounded-full bg-red-500/20 border border-red-500/40 flex-shrink-0 flex items-center justify-center">
-                <div class="w-1.5 h-1.5 rounded-full bg-red-400"></div>
-              </div>
-              <div>
-                <p class="text-sm text-slate-400">top10besthowtoreacthooks2024.click</p>
-                <p class="text-xs text-slate-600">Filtered by QueryRefine Pro</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- ── FEATURES ──────────────────────────────────────────────────── -->
-    <section id="features" class="py-24 px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <div class="badge-pill mb-4">Features</div>
-          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Everything you need to<br/>reclaim your search results</h2>
-          <p class="text-slate-400 max-w-xl mx-auto">Three powerful filters. Zero configuration. Works instantly after install.</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-
-          <!-- Developer Mode -->
-          <div class="card-hover bg-surface border border-border rounded-2xl p-7">
-            <div class="w-12 h-12 rounded-xl bg-electric/10 border border-electric/20 flex items-center justify-center mb-5">
-              <svg class="w-6 h-6 text-electric" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-2">Developer Mode</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              Automatically appends site-exclusion operators to your queries, surfacing Stack Overflow, GitHub and official docs instead of tutorial aggregators. One toggle — permanent signal boost.
-            </p>
-            <div class="mt-5 font-mono text-xs text-electric bg-navy rounded-lg px-3 py-2 border border-border">
-              -site:w3schools.com -site:geeksforgeeks.org
-            </div>
-          </div>
-
-          <!-- Anti-Pinterest -->
-          <div class="card-hover bg-surface border border-border rounded-2xl p-7">
-            <div class="w-12 h-12 rounded-xl bg-electric/10 border border-electric/20 flex items-center justify-center mb-5">
-              <svg class="w-6 h-6 text-electric" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-2">Anti-Pinterest Filter</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              Pinterest dominates search rankings without delivering actual content. This filter permanently removes pinterest.com, pinterest.co.uk and regional variants from every single query you make.
-            </p>
-            <div class="mt-5 flex items-center gap-2">
-              <span class="inline-block bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono px-2 py-1 rounded">-site:pinterest.*</span>
-              <span class="text-slate-500 text-xs">always on</span>
-            </div>
-          </div>
-
-          <!-- SEO Spam Filter -->
-          <div class="card-hover bg-surface border border-border rounded-2xl p-7">
-            <div class="w-12 h-12 rounded-xl bg-electric/10 border border-electric/20 flex items-center justify-center mb-5">
-              <svg class="w-6 h-6 text-electric" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-2">SEO Spam Filter</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              A curated, updatable blocklist of known content farms, AI-generated spam sites and low-quality affiliate link aggregators. Updated regularly as new spam domains emerge.
-            </p>
-            <div class="mt-5 flex flex-wrap gap-2">
-              <span class="text-xs bg-navy border border-border text-slate-500 font-mono px-2 py-1 rounded">link farms</span>
-              <span class="text-xs bg-navy border border-border text-slate-500 font-mono px-2 py-1 rounded">AI spam</span>
-              <span class="text-xs bg-navy border border-border text-slate-500 font-mono px-2 py-1 rounded">affiliate junk</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- stat strip -->
-        <div class="mt-12 grid grid-cols-3 gap-4">
-          <div class="bg-surface border border-border rounded-xl p-6 text-center">
-            <p class="text-3xl font-extrabold text-white">0</p>
-            <p class="text-slate-400 text-sm mt-1">Data stored</p>
-          </div>
-          <div class="bg-surface border border-border rounded-xl p-6 text-center">
-            <p class="text-3xl font-extrabold gradient-text">100%</p>
-            <p class="text-slate-400 text-sm mt-1">Client-side processing</p>
-          </div>
-          <div class="bg-surface border border-border rounded-xl p-6 text-center">
-            <p class="text-3xl font-extrabold text-white">Free</p>
-            <p class="text-slate-400 text-sm mt-1">Core filters always</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── CTA BAND ──────────────────────────────────────────────────── -->
-    <section class="py-20 px-6">
-      <div class="max-w-3xl mx-auto text-center bg-surface border border-electric/20 rounded-3xl p-12 glow">
-        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Ready for cleaner searches?</h2>
-        <p class="text-slate-400 mb-8">Install in one click. No sign-up required for core filters.</p>
-        <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener"
-           class="inline-flex items-center gap-3 bg-electric hover:bg-electricDark text-white font-semibold px-10 py-4 rounded-xl text-base transition-colors glow">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-            <circle cx="12" cy="12" r="5" fill="white"/>
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.2)"/>
-          </svg>
-          Install on Chrome — Free
-        </a>
-      </div>
-    </section>
-
-    <!-- ── PRIVACY POLICY ────────────────────────────────────────────── -->
-    <section id="privacy" class="py-24 px-6 border-t border-border">
-      <div class="max-w-3xl mx-auto">
-        <div class="badge-pill mb-6">Legal</div>
-        <h2 class="text-3xl font-bold text-white mb-3">Privacy Policy</h2>
-        <p class="text-slate-500 text-sm mb-10">Last updated: April 10, 2026</p>
-
-        <div class="space-y-8">
-
-          <div class="bg-surface border border-border rounded-xl p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-8 h-8 rounded-lg bg-electric/10 border border-electric/20 flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 h-4 text-electric" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
-                </svg>
-              </div>
-              <h3 class="text-base font-bold text-white">Data Collection</h3>
-            </div>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              We collect email addresses <strong class="text-slate-200">only</strong> for account synchronization and to enable Pro features. This data is used exclusively to authenticate your account and is never shared with or sold to third parties.
-            </p>
-          </div>
-
-          <div class="bg-surface border border-border rounded-xl p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-8 h-8 rounded-lg bg-electric/10 border border-electric/20 flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 h-4 text-electric" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                </svg>
-              </div>
-              <h3 class="text-base font-bold text-white">User Activity</h3>
-            </div>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              We monitor interactions within the extension popup (e.g., toggling filters on or off) solely to trigger the appropriate filtering behavior in real time. This interaction data is processed locally in your browser and is <strong class="text-slate-200">never transmitted</strong> to our servers.
-            </p>
-          </div>
-
-          <div class="bg-surface border border-border rounded-xl p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-8 h-8 rounded-lg bg-electric/10 border border-electric/20 flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 h-4 text-electric" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
-                </svg>
-              </div>
-              <h3 class="text-base font-bold text-white">Website Content</h3>
-            </div>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              We read Google search queries entered in your browser <strong class="text-slate-200">solely</strong> to programmatically append filtering operators (e.g., <code class="font-mono text-xs bg-navy px-1.5 py-0.5 rounded text-electric">-site:pinterest.com</code>) before the search is submitted. <strong class="text-slate-200">No search query data is stored, logged, or transmitted</strong> to any server. All processing happens entirely within your local browser session.
-            </p>
-          </div>
-
-          <div class="bg-electric/5 border border-electric/20 rounded-xl p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-8 h-8 rounded-lg bg-electric/15 border border-electric/30 flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 h-4 text-electric" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                </svg>
-              </div>
-              <h3 class="text-base font-bold text-white">Compliance</h3>
-            </div>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              This extension complies with the <strong class="text-slate-200">Chrome Web Store User Data Policy</strong>. We only request the minimum permissions necessary to perform filtering (access to <code class="font-mono text-xs bg-navy px-1.5 py-0.5 rounded text-electric">google.com</code> search URLs). We do not use data for purposes unrelated to the extension's core function, and we never sell user data to any third party.
-            </p>
-          </div>
-
-          <div class="bg-surface border border-border rounded-xl p-6">
-            <h3 class="text-base font-bold text-white mb-2">Contact</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              If you have any questions about this Privacy Policy or your data, please open an issue on our GitHub repository or contact us through the Chrome Web Store support channel listed on the extension page.
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ── FOOTER ───────────────────────────────────────────────────────── -->
-  <footer class="border-t border-border py-8 px-6">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <div class="w-6 h-6 rounded-md bg-electric flex items-center justify-center">
-          <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
-          </svg>
-        </div>
-        <span class="text-slate-400 text-sm">© 2026 <span class="text-white font-semibold">QueryRefine Pro</span>. All rights reserved.</span>
-      </div>
-      <div class="flex items-center gap-6 text-sm text-slate-500">
-        <a href="#privacy" class="hover:text-slate-300 transition-colors">Privacy Policy</a>
-        <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="hover:text-slate-300 transition-colors">Chrome Web Store</a>
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
+    <section id="features" class="py-24 px-
